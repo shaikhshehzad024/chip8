@@ -1,7 +1,5 @@
-#include <bitset>
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
 std::vector<uint8_t> getfont() {
   std::ifstream fontfile("fontset.txt");
@@ -10,20 +8,25 @@ std::vector<uint8_t> getfont() {
     return {};
   }
   std::vector<uint8_t> fontset;
-  std::string line;
-  while (std::getline(fontfile, line)) {
-    if (line.length() == 8) {
-      uint8_t value = static_cast<uint8_t>(std::bitset<8>(line).to_ulong());
-      fontset.push_back(value);
+  char bits[4];
+  char ch;
+  int count = 0;
+  while (fontfile.get(ch)) {
+    if (ch == '\n') {
+      count = 0;
+      continue;
+    }
+    if (ch == '0' || ch == '1') {
+      bits[count++] = ch;
+      if (count == 4) {
+        uint8_t number = ((bits[0] & 1) << 3) | ((bits[1] & 1) << 2) |
+                         ((bits[2] & 1) << 1) | ((bits[3] & 1) << 0);
+        number *= 10;
+        std::cout << static_cast<int>(number) << std::endl;
+        fontset.push_back(number);
+        count = 0;
+      }
     }
   }
-  fontfile.close();
   return fontset;
-}
-int main (int argc, char *argv[]) {
-  std::vector<uint8_t> font=getfont();
-  for(uint8_t i: font){
-    std::cout<<(int)i<<std::endl;
-  }
-  return 0;
 }
