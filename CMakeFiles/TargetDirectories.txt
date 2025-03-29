@@ -1,0 +1,3 @@
+/storage/emulated/0/Projects/chip8/CMakeFiles/rebuild_cache.dir
+/storage/emulated/0/Projects/chip8/CMakeFiles/edit_cache.dir
+/storage/emulated/0/Projects/chip8/CMakeFiles/CHIP-8.dir
