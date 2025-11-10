@@ -11,12 +11,10 @@ void vm::OP_00ee() {
   pc = stack[--sp];
   std::cout << "Returning to address: " << pc << "\n";
   std::cout << "stack after RET: ";
-  print_stack();
 }
 
 void vm::OP_1nnn(uint16_t address) {
   pc = address;
-  print_stack();
 }
 
 void vm::OP_2nnn(uint16_t address) {
@@ -40,12 +38,6 @@ void vm::OP_3xkk(uint8_t r_x, uint8_t byte) {
 
 void vm::OP_4xkk(uint8_t r_x, uint8_t byte) {
     if (v[r_x] !=byte) {
-        pc += 2;
-    }
-}
-
-void vm::OP_5xy0(uint8_t r_x, uint8_t r_y) {
-    if (v[r_x] == v[r_y]) {
         pc += 2;
     }
 }

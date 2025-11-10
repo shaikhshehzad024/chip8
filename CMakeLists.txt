@@ -1,7 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-project(chip8_test CXX)
+cmake_minimum_required(VERSION 3.20)
+project(Chip8)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_executable(chip8_test src/main.cpp)
+file(GLOB SRC_FILES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.cpp)
+add_executable(Chip8 ${SRC_FILES})

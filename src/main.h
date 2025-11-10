@@ -55,6 +55,7 @@ class vm {
 
   void load_program(const uint8_t *program, size_t size);
   void print_stack();
+  void print_registers();
   uint8_t memory[4096];
   uint8_t display[64*32];
 
