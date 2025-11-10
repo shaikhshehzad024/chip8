@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL2/SDL_render.h>
 #include <cstdint>
 #include <cstddef>
 
@@ -16,6 +17,7 @@ class vm {
   // these registers are not accessible from programs
   uint8_t sp;
   uint16_t pc; // program counter
+
 
   uint16_t stack[16]; // used to store address that interpreter should return
                       // when finished with a subroutine
@@ -57,9 +59,10 @@ class vm {
   void print_stack();
   void print_registers();
   uint8_t memory[4096];
-  uint8_t display[64*32];
+  uint8_t displayBuffer[64*32];
 
 public:
   vm();
   vm_result vm_interpret(const uint8_t *program, size_t size);
+  void renderDisplay(SDL_Renderer* renderer);
 };

@@ -3,3 +3,4 @@ project(Chip8)
 
 file(GLOB SRC_FILES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_executable(Chip8 ${SRC_FILES})
+find_package(SDL2 REQUIRED)
