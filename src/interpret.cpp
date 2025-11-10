@@ -3,6 +3,7 @@
 vm_result vm::vm_interpret(const uint8_t *program, size_t size) {
   // load program once
   load_program(program, size);
+  
   while (true) {
   print_registers();
     if (pc + 1 >= sizeof(memory)) {

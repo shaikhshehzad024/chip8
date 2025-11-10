@@ -17,6 +17,12 @@ vm::vm() {
     stack[i] = 0;
   }
   std::cout << "stack cleared successfully\n";
+
+  // clear display
+  for (int i = 0; i < 64 * 32; i++) {
+    displayBuffer[i] = 0;
+  }
+  std::cout << "display cleared successfully\n";
 }
 
 
