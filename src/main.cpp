@@ -40,7 +40,8 @@ vm::vm() {
     tableE[i] = &vm::OP_NULL;
   }
   table0[0x0] = &vm::OP_NULL;
-  table0[0xE] = &vm::OP_00ee;
+  table0[0xe0] = &vm::OP_00e0;
+  table0[0xEe] = &vm::OP_00ee;
   table8[0x0] = &vm::OP_8xy0;
   table8[0x1] = &vm::OP_8xy1;
   table8[0x2] = &vm::OP_8xy2;
