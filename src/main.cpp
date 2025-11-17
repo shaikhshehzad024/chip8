@@ -69,7 +69,7 @@ vm::vm() {
 }
 
 void vm::Table0() {
-  ((*this).*(table0[instruction & 0x000f]))();
+  ((*this).*(table0[instruction & 0x00ff]))();
 }
 void vm::Table8() {
   ((*this).*(table8[instruction & 0x000f]))();
