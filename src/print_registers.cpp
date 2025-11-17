@@ -12,3 +12,11 @@ void vm::print_registers() {
   printf("Sound Timer: %02X\n", sound_timer);
   print_stack();
 }
+
+void vm::print_stack() {
+  printf("Stack: ");
+  for (uint16_t i : stack) {
+    printf("%04X, ", i);
+  }
+  printf("end }\n");
+}

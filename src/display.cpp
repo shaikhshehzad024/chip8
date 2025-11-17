@@ -1,0 +1,47 @@
+#include <SDL2/SDL.h>
+#include "main.h"
+#include <iostream>
+#include "constants.h"
+
+void vm::renderDisplay(SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int y = 0; y < DISPLAY_HEIGHT; ++y) {
+        for (int x = 0; x < DISPLAY_WIDTH; ++x) {
+            int index = y * DISPLAY_WIDTH + x;
+            if (displayBuffer[index]) {
+                SDL_Rect pixelRect = {x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE};
+                SDL_RenderFillRect(renderer, &pixelRect);
+            }
+        }
+    }
+    SDL_RenderPresent(renderer);
+}
+
+static const uint8_t chip8_fontset[80] = {
+    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
+    0x20, 0x60, 0x20, 0x20, 0x70, // 1
+    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
+    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
+    0x90, 0x90, 0xF0, 0x10, 0x10, // 4
+    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
+    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
+    0xF0, 0x10, 0x20, 0x40, 0x40, // 7
+    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
+    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
+    0xF0, 0x90, 0xF0, 0x90, 0x90, // A
+    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
+    0xF0, 0x80, 0xF0, 0x80, 0xF0, // C
+    0xE0, 0x90, 0xE0, 0x90, 0xE0, // D
+    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
+    0xF0, 0x80, 0xF0, 0x80, 0x80  // F
+};
+
+void vm::installFontset() {
+    for (size_t i = 0; i < sizeof(chip8_fontset); ++i) {
+        memory[FONT_START_ADDRESS + i] = chip8_fontset[i];
+    }
+    std::cout << "Fontset installed successfully\n";
+}
